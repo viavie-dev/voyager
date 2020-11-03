@@ -1,10 +1,19 @@
 @extends('voyager::master')
 
 @section('content')
+
+
     <h1 class="page-title">
         <i class="icon voyager-paperclip"></i> URLS list
     </h1>
     <a href="{{ route('newurl') }}" class="btn btn-primary"><i class="voyager-list-add"></i>&nbsp;New url</a>
+    @if (Session::has('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+           <strong >{!! Session::get('success') !!}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" aria-hidden="true">&times;</button>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">

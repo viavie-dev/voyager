@@ -118,6 +118,38 @@ class UrlsController extends Controller
     }
 
 
+    public function new () {
+        return view('Urls/new');;
+    }
+
+    /**
+     *
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function create (Request $request){
+
+        $validatedData = $request->validate( [
+
+            'url'        => [
+                'required',
+                'string',
+                'max:1024',
+
+            ],
+            'description' => [ 'required', 'string' ]
+        ], [], [
+            'url'        => '&laquo; Url &raquo;',
+            'description' => '&laquo; Description &raquo;'
+        ] );
+
+    $newUrl = Url::create( [
+            'url' => $validatedData['url'],
+            'description'=> $validatedData['description']
+        ]);
+
+        return redirect('/admin/listurls')->with('success', 'Url with id=' . $newUrl->id . 'was updated successfuly') ;
+    }
     /**
      *
      * @param Request $request
